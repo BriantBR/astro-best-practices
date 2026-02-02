@@ -108,7 +108,7 @@ MIT
 
 ## Author
 
-**Brian Tyler** - [@briantylerec](https://github.com/briantylerec)
+**BriantDev** - [@BriantBR](https://github.com/BriantBR)
 
 ---
 
