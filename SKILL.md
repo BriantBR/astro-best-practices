@@ -9,9 +9,9 @@ description: >
 
 Astro 5.x framework for building fast, content-focused websites with Islands Architecture and zero JavaScript by default.
 
-## Core Concepts
+## Core Principles
 
-### Zero JavaScript by Default
+### 1. Zero JavaScript by Default
 
 Astro ships ZERO JavaScript unless you explicitly add a client directive.
 
@@ -26,7 +26,7 @@ Astro ships ZERO JavaScript unless you explicitly add a client directive.
 
 **Rule**: Only use client directives when components need hooks, state, or browser APIs.
 
-### Client Directives Quick Reference
+### 2. Client Directives
 
 | Directive | When to Use | Behavior |
 |-----------|-------------|----------|
@@ -36,43 +36,14 @@ Astro ships ZERO JavaScript unless you explicitly add a client directive.
 | `client:media="(query)"` | Responsive components | Hydrates when media query matches |
 | `client:only="framework"` | Breaks during SSR | Skips SSR, client-only render |
 
-**Decision Tree**:
-```
-Needs immediate interaction?        → client:load
-Non-critical interactivity?         → client:idle
-Below the fold?                     → client:visible
-Only on mobile/desktop?             → client:media="(query)"
-Breaks during SSR?                  → client:only="framework"
-No interactivity at all?            → No directive (static HTML)
-```
+**Decision tree**: Needs immediate interaction? → `client:load` | Non-critical? → `client:idle` | Below fold? → `client:visible` | Only on mobile/desktop? → `client:media` | Breaks SSR? → `client:only`
 
-### Islands Architecture
-
-Static shell + interactive islands hydrate independently:
-
-```astro
----
-import Header from '../components/Header.astro';       // Static
-import Counter from '../components/Counter.jsx';       // Interactive
-import Newsletter from '../components/Newsletter.vue'; // Interactive
----
-<html>
-  <body>
-    <Header />                          <!-- Static HTML -->
-    <Counter client:visible />          <!-- JS when visible -->
-    <Newsletter client:idle />          <!-- JS after page load -->
-  </body>
-</html>
-```
-
-### Multi-Framework Support
+### 3. Multi-Framework Support
 
 Mix React, Vue, Svelte in the same project:
 
 ```bash
-npx astro add react
-npx astro add vue
-npx astro add svelte
+npx astro add react vue svelte
 ```
 
 ```astro
@@ -86,15 +57,18 @@ import SvelteCounter from './Counter.svelte';
 <SvelteCounter client:load />
 ```
 
+---
+
 ## Quick Start
 
 ```bash
 npm create astro@latest my-project
 cd my-project
-npx astro add tailwind
-npx astro add react
+npx astro add tailwind react
 npm run dev
 ```
+
+---
 
 ## Project Structure
 
@@ -108,6 +82,8 @@ src/
 │   └── config.ts     # Schema definitions
 └── styles/           # Global CSS
 ```
+
+---
 
 ## Configuration
 
@@ -124,13 +100,12 @@ export default defineConfig({
 });
 ```
 
-## Output Modes
+**Output modes:**
+- `static` - Blog, docs, marketing (default)
+- `server` - Auth, dynamic data (requires adapter)
+- `hybrid` - Mostly static + some SSR pages
 
-| Mode | Use Case | Command |
-|------|----------|---------|
-| `static` | Blog, docs, marketing | Default |
-| `server` | Auth, dynamic data | `npx astro add vercel` |
-| `hybrid` | Mostly static + some SSR | Mix of both |
+---
 
 ## View Transitions
 
@@ -148,32 +123,7 @@ import { ViewTransitions } from 'astro:transitions';
 </html>
 ```
 
-## Content Collections
-
-Type-safe CMS for Markdown/MDX:
-
-```typescript
-// src/content/config.ts
-import { defineCollection, z } from 'astro:content';
-
-const blog = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    publishDate: z.date(),
-    tags: z.array(z.string()),
-    draft: z.boolean().default(false),
-  }),
-});
-
-export const collections = { blog };
-```
-
-```astro
 ---
-import { getCollection } from 'astro:content';
-const posts = await getCollection('blog', ({ data }) => !data.draft);
----
-```
 
 ## Commands
 
@@ -184,15 +134,46 @@ npm run preview          # Preview production build
 npx astro check          # TypeScript checks
 ```
 
-## References
+---
 
-- **Advanced patterns** (SSR, middleware, image optimization, API endpoints): See [references/advanced.md](references/advanced.md)
-- **Real-world examples** (blog, forms, auth, i18n, SEO): See [references/examples.md](references/examples.md)
+## Core Patterns
+
+Organized by priority - load on-demand as needed:
+
+### High Priority (Common Use Cases)
+
+- **[Content Collections](references/content-collections.md)** - Type-safe CMS for Markdown/MDX
+- **[Image Optimization](references/images.md)** - Built-in Image and Picture components
+- **[Server-Side Rendering](references/ssr.md)** - Dynamic routes, cookies, headers
+- **[API Endpoints](references/api-endpoints.md)** - Server-side API routes, RSS, sitemap
+
+### Medium Priority (Specific Features)
+
+- **[Middleware](references/middleware.md)** - Request interception for auth, logging
+- **[Pagination](references/pagination.md)** - Paginate large collections
+- **[Environment & Config](references/environment-config.md)** - Environment variables, TypeScript helpers
+
+### Low Priority (Advanced)
+
+- **[Custom Integrations](references/integrations.md)** - Extend Astro's build process
+
+---
+
+## Real-World Recipes
+
+Complete examples for common scenarios:
+
+- **[Blog Setup](references/recipe-blog.md)** - Full blog with tags, RSS, layouts
+- **[Multi-Step Forms](references/recipe-forms.md)** - React form with API integration
+- **[Authentication](references/recipe-auth.md)** - Cookie-based auth with protected routes
+- **[SEO](references/recipe-seo.md)** - Open Graph, Twitter Cards, structured data
+- **[i18n](references/recipe-i18n.md)** - Multi-language support
+- **[Dark Mode](references/recipe-dark-mode.md)** - Theme toggle with localStorage
+
+---
 
 ## External Resources
 
-- Official Documentation: https://docs.astro.build
-- Islands Architecture: https://docs.astro.build/en/concepts/islands/
-- Client Directives: https://docs.astro.build/en/reference/directives-reference/#client-directives
-- Content Collections: https://docs.astro.build/en/guides/content-collections/
-- View Transitions: https://docs.astro.build/en/guides/view-transitions/
+- **Official Documentation**: https://docs.astro.build
+- **Islands Architecture**: https://docs.astro.build/en/concepts/islands/
+- **Client Directives**: https://docs.astro.build/en/reference/directives-reference/#client-directives

@@ -52,9 +52,35 @@ This skill is designed to be used with AI assistants that support the skills.sh 
 
 ## Contents
 
-- **[SKILL.md](SKILL.md)**: Core concepts and quick reference
-- **[references/advanced.md](references/advanced.md)**: SSR, middleware, image optimization, API endpoints
-- **[references/examples.md](references/examples.md)**: Real-world implementation patterns
+### Core Documentation
+
+- **[SKILL.md](SKILL.md)**: Core principles, quick start, and reference index
+
+### Feature References (Load on-demand)
+
+**High Priority** (Common use cases):
+- **[Content Collections](references/content-collections.md)**: Type-safe CMS for Markdown/MDX
+- **[Image Optimization](references/images.md)**: Built-in Image and Picture components
+- **[Server-Side Rendering](references/ssr.md)**: Dynamic routes, cookies, headers
+- **[API Endpoints](references/api-endpoints.md)**: Server-side API routes, RSS, sitemap
+
+**Medium Priority** (Specific features):
+- **[Middleware](references/middleware.md)**: Request interception for auth, logging
+- **[Pagination](references/pagination.md)**: Paginate large collections
+- **[Environment & Config](references/environment-config.md)**: Environment variables, TypeScript helpers
+
+**Low Priority** (Advanced):
+- **[Custom Integrations](references/integrations.md)**: Extend Astro's build process
+
+### Real-World Recipes
+
+Complete examples for common scenarios:
+- **[Blog Setup](references/recipe-blog.md)**: Full blog with tags, RSS, layouts
+- **[Multi-Step Forms](references/recipe-forms.md)**: React form with API integration
+- **[Authentication](references/recipe-auth.md)**: Cookie-based auth with protected routes
+- **[SEO](references/recipe-seo.md)**: Open Graph, Twitter Cards, structured data
+- **[i18n](references/recipe-i18n.md)**: Multi-language support
+- **[Dark Mode](references/recipe-dark-mode.md)**: Theme toggle with localStorage
 
 ## Quick Start Example
 
