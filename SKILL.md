@@ -96,15 +96,16 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   site: 'https://example.com',
-  output: 'static',  // or 'server' or 'hybrid'
+  output: 'static',  // or 'server'
   integrations: [tailwind(), react()],
 });
 ```
 
-**Output modes:**
-- `static` - Blog, docs, marketing (default)
-- `server` - Auth, dynamic data (requires adapter)
-- `hybrid` - Mostly static + some SSR pages
+**Output modes (Astro 5):**
+- `static` - Blog, docs, marketing (default). Use `export const prerender = false` for SSR pages.
+- `server` - All pages SSR (requires adapter)
+
+> **Astro 5 Change**: `output: 'hybrid'` was removed. The hybrid behavior is now the default in `static` mode.
 
 ---
 

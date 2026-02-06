@@ -69,29 +69,31 @@ const clientIp = Astro.clientAddress;
 
 ---
 
-## Hybrid Rendering (Static + SSR)
+## Mixed Rendering (Static + SSR)
+
+> **Astro 5**: `output: 'hybrid'` was removed. Use `output: 'static'` with `prerender = false` on individual pages.
 
 Mix static and SSR pages in the same project:
 
 ```javascript
 // astro.config.mjs
 export default defineConfig({
-  output: 'hybrid', // Default to static, opt-in to SSR
-  adapter: vercel(),
+  output: 'static', // Default: all pages static
+  adapter: vercel(), // Required for SSR
 });
 ```
 
 ```astro
 ---
 // src/pages/about.astro
-// This page is static (pre-rendered at build time)
-export const prerender = true; // Explicit (default in hybrid mode)
+// This page is static (pre-rendered at build time) - default behavior
+// No need for prerender = true (it's the default)
 ---
 
 ---
 // src/pages/dashboard.astro
 // This page is SSR (rendered on each request)
-export const prerender = false; // Opt-in to SSR
+export const prerender = false; // Opt-out of prerendering
 ---
 ```
 
