@@ -8,14 +8,19 @@ category: patterns
 
 Content Collections provide type-safe content management for Markdown, MDX, and JSON files.
 
+> **Astro 5 Update**: Content Collections now use a new loader-based API. The config file moved from `src/content/config.ts` to `src/content.config.ts` in the root of `src/`.
+
 ## Schema Definition
 
 ```typescript
-// src/content/config.ts
-import { defineCollection, z } from 'astro:content';
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { glob, file } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const blog = defineCollection({
-  type: 'content', // or 'data' for JSON/YAML
+  // Load Markdown/MDX files using glob loader
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -32,7 +37,8 @@ const blog = defineCollection({
 });
 
 const authors = defineCollection({
-  type: 'data',
+  // Load JSON data using file loader
+  loader: file('src/data/authors.json'),
   schema: z.object({
     name: z.string(),
     email: z.string().email(),

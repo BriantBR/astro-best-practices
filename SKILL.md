@@ -79,8 +79,9 @@ src/
 ├── pages/            # File-based routing
 │   └── blog/[slug].astro
 ├── content/          # Content Collections (Markdown/MDX)
-│   └── config.ts     # Schema definitions
-└── styles/           # Global CSS
+│   └── blog/         # Collection folders
+├── styles/           # Global CSS
+└── content.config.ts # Content collections schema (Astro 5+)
 ```
 
 ---
@@ -109,19 +110,21 @@ export default defineConfig({
 
 ## View Transitions
 
-Enable SPA-like navigation:
+Enable SPA-like navigation with the Client Router:
 
 ```astro
 ---
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 ---
 <html>
   <head>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body><slot /></body>
 </html>
 ```
+
+**Note**: In Astro 5, `ViewTransitions` was renamed to `ClientRouter`.
 
 ---
 

@@ -13,6 +13,50 @@ Complete blog setup with type-safe content, tags, and RSS feed.
 ```
 src/
 ├── content/
+│   └── blog/
+│       ├── first-post.md
+│       ├── second-post.mdx
+│       └── third-post.md
+├── layouts/
+│   └── BlogLayout.astro
+├── pages/
+│   ├── blog/
+│   │   ├── index.astro
+│   │   ├── [slug].astro
+│   │   └── tags/
+│   │       └── [tag].astro
+│   └── rss.xml.ts
+└── content.config.ts    # Content collections config (Astro 5+)
+```
+
+---
+
+## Blog Schema
+
+```typescript
+// src/content.config.ts
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const blog = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishDate: z.coerce.date(),
+    updatedDate: z.coerce.date().optional(),
+    author: z.string(),
+    tags: z.array(z.string()),
+    image: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog };
+```
+src/
+├── content/
 │   ├── config.ts
 │   └── blog/
 │       ├── first-post.md

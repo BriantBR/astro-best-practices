@@ -38,6 +38,28 @@ export const onRequest = defineMiddleware(async (context, next) => {
 
 ---
 
+## Storing Data in context.locals
+
+Use `context.locals` to pass data from middleware to pages and API endpoints.
+
+> **Astro 5 Breaking Change**: You can no longer completely replace `context.locals`. Use `Object.assign()` instead:
+
+```typescript
+// ✅ Correct (Astro 5)
+Object.assign(context.locals, {
+  user: await getUser(token),
+  timestamp: Date.now(),
+});
+
+// ❌ Incorrect - Don't replace locals entirely
+context.locals = {
+  user: await getUser(token),
+  timestamp: Date.now(),
+};
+```
+
+---
+
 ## Use Cases
 
 | Use Case | Example |
