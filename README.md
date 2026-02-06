@@ -3,8 +3,10 @@
 [![Install with Skills](https://img.shields.io/badge/skills-install-blue?style=for-the-badge)](https://skills.sh)
 [![GitHub](https://img.shields.io/github/stars/BriantBR/astro-best-practices?style=for-the-badge)](https://github.com/BriantBR/astro-best-practices)
 
-A comprehensive skill for building production-ready Astro applications with Islands Architecture, client directives, and modern web patterns.
+A comprehensive skill for building production-ready **Astro 5.x** applications with Islands Architecture, client directives, and modern web patterns.
 
+> **🚀 Astro 5 Ready**: Updated with all Astro 5 breaking changes including the new Content Collections loader API, ClientRouter (formerly ViewTransitions), and context.locals updates.
+>
 > **AI-Powered Development**: This skill enhances AI coding assistants (Claude, Cursor, Windsurf) with expert Astro patterns and best practices.
 
 ## What This Skill Covers
@@ -12,10 +14,10 @@ A comprehensive skill for building production-ready Astro applications with Isla
 - **Islands Architecture**: Zero JavaScript by default with selective hydration
 - **Client Directives**: `client:load`, `client:idle`, `client:visible`, `client:media`, `client:only`
 - **Multi-Framework Support**: Mix React, Vue, and Svelte in the same project
-- **Content Collections**: Type-safe CMS for Markdown/MDX content
-- **View Transitions**: SPA-like navigation with native browser APIs
+- **Content Collections**: Type-safe CMS with new loader API (`glob()`, `file()`) - Astro 5
+- **View Transitions**: SPA-like navigation with `<ClientRouter />` - Astro 5
 - **Advanced Patterns**: SSR, middleware, image optimization, API endpoints
-- **Real-World Examples**: Blogs, forms, authentication, i18n, SEO
+- **Real-World Examples**: Blogs, forms, authentication, i18n, SEO, dark mode
 
 ## Installation
 
